@@ -125,22 +125,14 @@ export default function Navbar() {
                             <Home size={15} />
                             <span className="hidden sm:inline">Home</span>
                         </Link>
-                        <Link
-                            href="/my-tests"
+                        {/* COMMENTED OUT: My Tests link (can re-enable later)
+                        <Link href="/my-tests"
                             className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium transition-all duration-200"
-                            style={{ color: 'var(--text-secondary)' }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.color = 'var(--text-primary)';
-                                e.currentTarget.style.background = 'var(--bg-hover)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.color = 'var(--text-secondary)';
-                                e.currentTarget.style.background = 'transparent';
-                            }}
-                        >
+                            style={{ color: 'var(--text-secondary)' }}>
                             <FlaskConical size={15} />
                             <span className="hidden sm:inline">My Tests</span>
                         </Link>
+                        */}
 
                         <div className="w-px h-6" style={{ background: 'var(--border-primary)' }} />
                     </>

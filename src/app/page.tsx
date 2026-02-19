@@ -306,53 +306,44 @@ export default function LandingPage() {
                     </div>
 
                     <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                        What&apos;s the verdict?
+                        Nice! What&apos;s next?
                     </h2>
                     <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                        Publish for the team to test, or discard and try a new thumbnail.
+                        Flash this thumbnail again, or try a different one.
                     </p>
 
                     <div className="flex gap-3 justify-center">
                         <button
-                            onClick={publishTest}
-                            disabled={submitting}
+                            onClick={startFlashTest}
                             className="btn-primary flex items-center gap-2 px-8 py-3 text-base"
                             style={{ boxShadow: 'var(--shadow-glow)' }}
                         >
-                            {submitting ? (
-                                <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            ) : (
-                                <CheckCircle size={18} />
-                            )}
-                            {submitting ? 'Publishing...' : 'Publish for Team'}
+                            <RefreshCw size={18} />
+                            Flash Again
                         </button>
                         <button
-                            onClick={discardTest}
-                            disabled={submitting}
+                            onClick={resetAll}
                             className="btn-secondary flex items-center gap-2 px-6 py-3"
                         >
-                            <Trash2 size={16} />
-                            Discard
+                            <Eye size={16} />
+                            Test Another
                         </button>
                     </div>
 
-                    <button
-                        onClick={startFlashTest}
-                        disabled={submitting}
-                        className="mt-5 text-sm transition-all duration-200 flex items-center gap-1.5 mx-auto px-4 py-2 rounded-lg"
-                        style={{ color: 'var(--text-muted)' }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.color = 'var(--text-primary)';
-                            e.currentTarget.style.background = 'var(--bg-hover)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.color = 'var(--text-muted)';
-                            e.currentTarget.style.background = 'transparent';
-                        }}
-                    >
-                        <RefreshCw size={14} />
-                        Flash again
-                    </button>
+                    {/* COMMENTED OUT: Publish + Discard (can re-enable later)
+                    <div className="flex gap-3 justify-center">
+                        <button onClick={publishTest} disabled={submitting}
+                            className="btn-primary flex items-center gap-2 px-8 py-3 text-base"
+                            style={{ boxShadow: 'var(--shadow-glow)' }}>
+                            {submitting ? <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <CheckCircle size={18} />}
+                            {submitting ? 'Publishing...' : 'Publish for Team'}
+                        </button>
+                        <button onClick={discardTest} disabled={submitting}
+                            className="btn-secondary flex items-center gap-2 px-6 py-3">
+                            <Trash2 size={16} /> Discard
+                        </button>
+                    </div>
+                    */}
 
                     {error && (
                         <div className="text-red-400 text-sm mt-4 bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-3">
@@ -418,19 +409,18 @@ export default function LandingPage() {
                             <BarChart3 size={16} />
                             View Results
                         </Link>
-                        <button
-                            onClick={reviewRandomTest}
-                            disabled={reviewLoading}
-                            className="btn-secondary flex items-center gap-2"
-                        >
-                            <Zap size={14} />
-                            {reviewLoading ? 'Finding...' : 'Review Others\' Work'}
-                        </button>
                         <button onClick={resetAll} className="btn-secondary flex items-center gap-2">
                             <RefreshCw size={14} />
                             Test Another
                         </button>
                     </div>
+                    {/* COMMENTED OUT: Review Others' Work (can re-enable later)
+                    <button onClick={reviewRandomTest} disabled={reviewLoading}
+                        className="btn-secondary flex items-center gap-2">
+                        <Zap size={14} />
+                        {reviewLoading ? 'Finding...' : "Review Others' Work"}
+                    </button>
+                    */}
                     {noMoreTests && (
                         <p className="text-xs text-center mt-3" style={{ color: 'var(--accent-pink)' }}>
                             🎉 No more tests to review — you&apos;ve seen them all!
@@ -636,43 +626,24 @@ export default function LandingPage() {
                                         <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
                                     </button>
 
-                                    {/* Divider */}
+                                    {/* COMMENTED OUT: Review Others' Work (can re-enable later)
                                     <div className="flex items-center gap-3">
                                         <div className="flex-1 h-px" style={{ background: 'var(--border-primary)' }} />
                                         <span className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: 'var(--text-muted)' }}>or</span>
                                         <div className="flex-1 h-px" style={{ background: 'var(--border-primary)' }} />
                                     </div>
-
-                                    {/* Review Others */}
-                                    <button
-                                        type="button"
-                                        onClick={reviewRandomTest}
-                                        disabled={reviewLoading}
+                                    <button type="button" onClick={reviewRandomTest} disabled={reviewLoading}
                                         className="w-full py-3 text-sm font-medium flex items-center justify-center gap-2 rounded-xl transition-all duration-200"
-                                        style={{
-                                            background: 'var(--bg-elevated)',
-                                            color: 'var(--text-secondary)',
-                                            border: '1px solid var(--border-primary)',
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            e.currentTarget.style.background = 'var(--accent-green-muted)';
-                                            e.currentTarget.style.color = 'var(--accent-green)';
-                                            e.currentTarget.style.borderColor = 'var(--accent-green)';
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.currentTarget.style.background = 'var(--bg-elevated)';
-                                            e.currentTarget.style.color = 'var(--text-secondary)';
-                                            e.currentTarget.style.borderColor = 'var(--border-primary)';
-                                        }}
-                                    >
+                                        style={{ background: 'var(--bg-elevated)', color: 'var(--text-secondary)', border: '1px solid var(--border-primary)' }}>
                                         <Zap size={16} />
-                                        {reviewLoading ? 'Finding a test...' : 'Review Others\' Work'}
+                                        {reviewLoading ? 'Finding a test...' : "Review Others' Work"}
                                     </button>
                                     {noMoreTests && (
                                         <p className="text-xs text-center" style={{ color: 'var(--accent-pink)' }}>
-                                            🎉 No more tests to review — you&apos;ve seen them all!
+                                            🎉 No more tests to review — you've seen them all!
                                         </p>
                                     )}
+                                    */}
 
                                     <p className="text-xs text-center" style={{ color: 'var(--text-muted)' }}>
                                         Testing as <strong style={{ color: 'var(--text-primary)' }}>{profile?.name}</strong>. You&apos;ll see a 1-second flash.
