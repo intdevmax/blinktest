@@ -7,6 +7,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'BlinkTest — Thumbnail Testing',
   description: 'Internal thumbnail testing tool for the MrBeast team',
+  icons: {
+    icon: '/ico.png',
+  },
 };
 
 export default function RootLayout({
